@@ -295,6 +295,7 @@ def getBfield(rTarg,zTarg, \
 def process_solps_output_for_gitr(dakota_filename = '/Users/Alyssa/Dev/solps-iter-data/build/dakota', \
                                   nR = 500, nZ = 1000, plot_variables=0, \
                                   b2fstate_filename = '/Users/Alyssa/Dev/WEST/helium/b2fstate'):
+
     nIonSpecies, am, zamin, zn = get_solps_species(b2fstate_filename)
 
     dak = np.loadtxt(dakota_filename)
@@ -374,17 +375,22 @@ def process_solps_output_for_gitr(dakota_filename = '/Users/Alyssa/Dev/solps-ite
 
     grad_ti_r,grad_ti_t,grad_ti_z = project_parallel_variable_xyz(grad_ti, br, bphi, bz,rdak,zdak, nR, nZ, 'grad_ti',plot_variables)
     grad_te_r,grad_te_t,grad_te_z = project_parallel_variable_xyz(grad_te, br, bphi, bz,rdak,zdak, nR, nZ, 'grad_te',plot_variables)
+
     grad_ti_r[off_grid_inds] = 0.0;
     grad_ti_t[off_grid_inds] = 0.0;
     grad_ti_z[off_grid_inds] = 0.0;
     grad_te_r[off_grid_inds] = 0.0;
     grad_te_t[off_grid_inds] = 0.0;
     grad_te_z[off_grid_inds] = 0.0;
+
     e_para = get_dakota_variable(5+ 5*nIonSpecies+6, dak, rdak, zdak, nR, nZ, 'e_para',plot_variables)
     e_perp = get_dakota_variable(5+ 5*nIonSpecies+7, dak, rdak, zdak, nR, nZ, 'e_perp',plot_variables)
+
     e_para[off_grid_inds] = 0.0;
     e_perp[off_grid_inds] = 0.0;
+
     profiles_filename = "profiles.nc"
+
     if os.path.exists(profiles_filename):
         os.remove(profiles_filename)
 
@@ -921,7 +927,7 @@ if __name__ == "__main__":
     #getBfield(rTarg,zTarg,"/Users/tyounkin/Dissertation/ITER/mq3/final/Baseline2008-li0.70.x4.equ","/Users/tyounkin/Code/gitr2/iter/iter_milestone/2d/input/iterGeom2DdirBe0.cfg")
     process_solps_output_for_gitr()
     #get_solps_species()
-    readEquilibrium()
+    #readEquilibrium()
     #read_b2f_geometry()
     #find_strike_points()
     #read_target_file()
