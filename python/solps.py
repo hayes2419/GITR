@@ -778,6 +778,7 @@ def make_solps_targ_coord_file(gitr_geom_filename='/Users/Alyssa/Dev/GITR/west/h
     solps_geom = '/Users/Alyssa/Dev/WEST/baserun/b2fgmtry', \
     coords_file = '/Users/Alyssa/Dev/GITR/west/helium/input/right_target_coordinates.txt', \
     right_target_filename= '/Users/Alyssa/Dev/solps-iter-data/build/rightTargOutput'):
+
     r, z, ti, ni, flux, te, ne = read_target_file(right_target_filename)
 
     x_x_point, y_x_point, \

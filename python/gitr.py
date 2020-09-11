@@ -1121,7 +1121,7 @@ def make_gitr_geometry_from_solps_west(gitr_geometry_filename='gitrGeometry.cfg'
     plt.xlabel('r [m]')
     plt.ylabel('z [m]')
     plt.title('Raw WEST Geometry from SOLPS')
-    plt.savefig('mesh_extra_west.pdf')
+    #plt.savefig('mesh_extra_west.pdf')
 
     #plt.scatter(r,z,s=0.4)
     #plt.savefig('mesh_extra_west_scatter.png')
@@ -1133,7 +1133,7 @@ def make_gitr_geometry_from_solps_west(gitr_geometry_filename='gitrGeometry.cfg'
     plt.plot(r_left_target, z_left_target)
     plt.plot(r_right_target, z_right_target)
     plt.title('Raw WEST Targets from SOLPS')
-    plt.savefig('targets_west.pdf')
+    #plt.savefig('targets_west.pdf')
 
     #integrate target geometry into base geometry
     #uncomment print statements here and in replace_line_segments_west
@@ -1153,7 +1153,7 @@ def make_gitr_geometry_from_solps_west(gitr_geometry_filename='gitrGeometry.cfg'
     plt.xlabel('r [m]')
     plt.ylabel('z [m]')
     plt.title('Target Geometry Integrated with WEST')
-    plt.savefig('final_west.pdf')
+    #plt.savefig('final_west.pdf')
 
 
     #define interior side of each line segment in the geometry with inDir
