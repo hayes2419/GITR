@@ -116,6 +116,8 @@ def plot2dGeom(filename="gitrGeometry.cfg"):
     y2 = config.geom.y2
     ys1 = np.ones(x1.size) * y1
     ys2 = np.ones(x1.size) * y2
+    slope = np.array(config.geom.slope)
+    inDir = np.array(config.geom.inDir)
     # if plt.fignum_exists(num=1):
     plt.plot(np.append(x1, x1[0]), np.append(z1, z1[0]), linewidth=2.0, color='k')
     # else:
@@ -129,7 +131,7 @@ def plot2dGeom(filename="gitrGeometry.cfg"):
     #    plt.savefig('geomPlot.png')
     #    print('config', config)
     #    print('x1 ', x1)
-    return x1, x2, z1, z2, length, Z
+    return x1, x2, z1, z2, length, Z, slope, inDir
 
 
 def read3dGeom(filename="gitrGeometry.cfg"):
@@ -1072,7 +1074,7 @@ def make_gitr_geometry_from_solps_west(gitr_geometry_filename='gitrGeometry.cfg'
     plt.xlabel('r [m]')
     plt.ylabel('z [m]')
     plt.title('Raw WEST Geometry from SOLPS')
-    plt.savefig('mesh_extra_west.pdf')
+    #plt.savefig('mesh_extra_west.pdf')
 
     #plt.scatter(r,z,s=0.4)
     #plt.savefig('mesh_extra_west_scatter.png')
@@ -1084,7 +1086,7 @@ def make_gitr_geometry_from_solps_west(gitr_geometry_filename='gitrGeometry.cfg'
     plt.plot(r_left_target, z_left_target)
     plt.plot(r_right_target, z_right_target)
     plt.title('Raw WEST Targets from SOLPS')
-    plt.savefig('targets_west.pdf')
+    #plt.savefig('targets_west.pdf')
 
     #integrate target geometry into base geometry
     #uncomment print statements here and in replace_line_segments_west
@@ -1104,7 +1106,7 @@ def make_gitr_geometry_from_solps_west(gitr_geometry_filename='gitrGeometry.cfg'
     plt.xlabel('r [m]')
     plt.ylabel('z [m]')
     plt.title('Target Geometry Integrated with WEST')
-    plt.savefig('final_west.pdf')
+    #plt.savefig('final_west.pdf')
 
 
     #define interior side of each line segment in the geometry with inDir
@@ -1209,7 +1211,7 @@ def lines_to_vectors_west(lines, inDir, filename):
         plt.quiver([x1[i] + (x2[i]-x1[i])/2], [z1[i] + (z2[i]-z1[i])/2], [rPerp/10], [zPerp/10], width=0.0015, scale=5, headwidth=4)
 
     plt.axis('scaled')
-    plt.savefig(filename)
+    #plt.savefig(filename)
 
 def removeQuotes(infile='this.cfg',outfile='that.cfg'):
     with open(infile, 'r') as f, open(outfile, 'w') as fo:
