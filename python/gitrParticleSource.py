@@ -466,7 +466,6 @@ def particleSource2d_west(nParticles = int(1e3), \
         vxP[i] = parVec[mins[i],0]*vx[i] + parVec2[mins[i],0]*vy[i] + perpVec[mins[i],0]*vz[i];
         vyP[i] = parVec[mins[i],1]*vx[i] + parVec2[mins[i],1]*vy[i] + perpVec[mins[i],1]*vz[i];
         vzP[i] = parVec[mins[i],2]*vx[i] + parVec2[mins[i],2]*vy[i] + perpVec[mins[i],2]*vz[i];
-
         #if z_sample[i] < -3.8 :
             #print('r,z',r_sample[i],z_sample[i])
             #print('perpVec xyz',perpVec[mins[i],0],perpVec[mins[i],1],perpVec[mins[i],2])
