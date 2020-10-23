@@ -402,6 +402,7 @@ def particleSource2d_west(nParticles = int(1e3), \
     z_sample = z1[mins] + (z2[mins] - z1[mins])*diff[mins,range(nParticles)]/particles_per_second[mins]*pps_sum
     #print('rsamp',r_sample)
     #print('zsamp',z_sample)
+
     plt.close()
     plt.plot(r1,z1)
     plt.scatter(r_sample,z_sample,alpha=0.1)

@@ -607,6 +607,11 @@ def get_target_coordinates(solps_geometry_filename='/Users/tyounkin/Dissertation
     r_outer_target = np.append(r_outer_target[0,:], r_outer_target[1,-1])
     z_outer_target = np.append(z_outer_target[0,:], z_outer_target[1,-1])
 
+    #r_inner_target = np.unique(r_inner_target)
+    #z_inner_target = np.unique(z_inner_target)
+    #r_outer_target = np.unique(r_outer_target)
+    #z_outer_target = np.unique(z_outer_target)
+
     #print('r_inner_target',r_inner_target)
     #print('z_inner_target',z_inner_target)
     #print('r_outer_target',r_outer_target)
@@ -829,6 +834,7 @@ def make_solps_targ_coord_file(gitr_geom_filename='/Users/Alyssa/Dev/GITR/west/h
 
     i_a, i_b = intersection(x1, z1, r_right_target, z_right_target)
     print('i_a',i_a)
+
     A = np.zeros((len(i_a),10))
     A[:,0] = r_right_target
     A[:,1] = z_right_target
@@ -870,17 +876,18 @@ def make_solps_targ_file(solps_geom = '/Users/Alyssa/Dev/WEST/baserun/b2fgmtry',
     print('zmid', z_midpoint)
 
     r, z, br, bz, bt, psi = readEquilibrium(b_field_file)
-    
+
     btot = np.sqrt(np.multiply(br,br) + np.multiply(bz,bz) + np.multiply(bt,bt))
 
     #f = scii.interp2d(r,z,btot)
     #btarg = f(r_midpoint,z_midpoint)
     grid_r, grid_z = np.meshgrid(r,z)
     print(grid_r.shape, grid_z.shape, btot.shape)
+
     btarg = scii.griddata((grid_r.flatten(),grid_z.flatten()), btot.flatten(), (r_midpoint, z_midpoint), method='linear')
     brtarg = scii.griddata((grid_r.flatten(),grid_z.flatten()), br.flatten(), (r_midpoint, z_midpoint), method='linear')
     bztarg = scii.griddata((grid_r.flatten(),grid_z.flatten()), bz.flatten(), (r_midpoint, z_midpoint), method='linear')
-    
+
     angle = 180.0/np.pi*np.arccos(np.divide(np.multiply(brtarg,rPerp) + np.multiply(bztarg,zPerp),btarg))
 
     len_rmid = len(r_midpoint)-2
@@ -900,7 +907,7 @@ def make_solps_targ_file(solps_geom = '/Users/Alyssa/Dev/WEST/baserun/b2fgmtry',
     np.savetxt('solpsTarg.txt',A,delimiter=',',header='R-Rsep, r, z, Te, Ti, Flux (for each species), n (for each species), Btot, Bangle')
 
 def read_targ_coordinates_file(filename = 'right_target_coordinates.txt'):
-    
+
     data = np.loadtxt(filename, skiprows=0)
 
     r_right_target = data[:,0]
@@ -935,11 +942,3 @@ if __name__ == "__main__":
     #get_target_coordinates()
     #make_solps_targ_coord_file()
     #make_solps_targ_file()
-    #make_solps_targ_file(gitr_geom_filename='gitr_geometry.cfg', \
-    #solps_geom = '/project/projectdirs/m1709/psi-install-cori/solps_data/mq3/b2fgmtry', \
-    #right_target_filename= 'rightTargOutput')
-    #make_solps_targ_file_txt(solps_geom='/Users/tyounkin/Dissertation/ITER/mq3/solps/b2fgmtry',b_field_file = '/Users/tyounkin/Dissertation/ITER/mq3/solps/Baseline2008-li0.70.x4.equ')
-    #solps_geom = '/Users/tyounkin/postDoc/DOE-West/Deuterium/WEST_D_run1/baserun/b2fgmtry', \
-    #b_field_file = '/Users/tyounkin/postDoc/DOE-West/Deuterium/WEST_D_run1/baserun/west_54034_10p2s_mag.X4.equ', \
-    #coords_file = 'right_target_coordinates.txt', \
-    #right_target_filename= 'rightTargOutput')
